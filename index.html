@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>Display a map</title>
+
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+
+    <link rel="stylesheet" href="https://js.arcgis.com/4.24/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.24/"></script>
+
+    <script>
+      require(["esri/config",
+	  "esri/Map", 
+	  "esri/views/MapView",
+	   "esri/layers/FeatureLayer",
+	   "esri/widgets/Locate"], function (esriConfig,Map, MapView,$FeatureLayer) {
+
+        esriConfig.apiKey = "AAPK449340f85b664e6b802d2d0e65eb4849vlSII8YqKpEj5Fn0hCy2qr4QyOAZRZSB6XWDc2-X8pFlNoRYoQoetUvFs1Y_JVKL";
+
+        const map = new Map({
+          basemap: "arcgis-topographic" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [104.07,30.66], // Longitude, latitude
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+		  
+        });
+		const trailheadsLayer = new $FeatureLayer({
+		    url: "https://services3.arcgis.com/GVgbJbqm8hXASVYi/arcgis/rest/services/Trailheads/FeatureServer/0"
+		  });
+		const locate_ =new $L({
+		  view: view_GIS,
+		  useHeadingEnabled: false,
+		  goToOverride: function(view, options) {
+		    options.target.scale = 1500;
+		    return view.goTo(options.target);
+			
+		
+		})
+		// promise后跟.then
+		
+    </script>
+
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+</html>
